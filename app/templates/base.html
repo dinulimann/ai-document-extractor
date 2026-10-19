@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}AI Document Extractor{% endblock %}</title>
+  {% block head %}{% endblock %}
+  <style>
+    :root { --bg:#f6f7f9; --card:#fff; --text:#1d2433; --muted:#667085; --line:#e4e7ec;
+            --accent:#2563eb; --ok:#067647; --ok-bg:#ecfdf3; --warn:#b54708; --warn-bg:#fffaeb;
+            --bad:#b42318; --bad-bg:#fef3f2; --info-bg:#eff4ff; }
+    * { box-sizing: border-box; }
+    body { margin:0; font:14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+           background:var(--bg); color:var(--text); }
+    header { background:var(--card); border-bottom:1px solid var(--line); padding:14px 24px;
+             display:flex; align-items:center; gap:16px; }
+    header a.brand { font-weight:700; font-size:16px; color:var(--text); text-decoration:none; }
+    header .model { color:var(--muted); font-size:12px; margin-left:auto; }
+    main { max-width:1200px; margin:24px auto; padding:0 16px; }
+    .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:18px; margin-bottom:18px; }
+    h1 { font-size:20px; margin:0 0 4px; } h2 { font-size:15px; margin:0 0 12px; }
+    .muted { color:var(--muted); }
+    table { width:100%; border-collapse:collapse; }
+    th, td { text-align:left; padding:8px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
+    th { font-size:12px; color:var(--muted); font-weight:600; }
+    td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
+    a { color:var(--accent); }
+    .badge { display:inline-block; padding:2px 8px; border-radius:999px; font-size:12px; font-weight:600; }
+    .s-approved, .s-extracted { background:var(--ok-bg); color:var(--ok); }
+    .s-needs_review { background:var(--warn-bg); color:var(--warn); }
+    .s-failed { background:var(--bad-bg); color:var(--bad); }
+    .s-processing { background:var(--info-bg); color:var(--accent); }
+    .stats { display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:12px; }
+    .stat { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px; }
+    .stat b { display:block; font-size:22px; }
+    button, .btn { background:var(--accent); color:#fff; border:0; border-radius:8px; padding:8px 14px;
+                   font-weight:600; cursor:pointer; text-decoration:none; display:inline-block; font-size:14px; }
+    .btn.secondary, button.secondary { background:#fff; color:var(--text); border:1px solid var(--line); }
+    input[type=text], input[type=date] { width:100%; padding:6px 8px; border:1px solid var(--line);
+                   border-radius:6px; font:inherit; background:#fff; }
+    .issue { background:var(--warn-bg); color:var(--warn); border-radius:8px; padding:8px 12px; margin-bottom:6px; }
+    .row { display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+    @media (max-width: 640px) { header { flex-wrap:wrap; } .hide-sm { display:none; } }
+  </style>
+</head>
+<body>
+<header>
+  <a class="brand" href="/">📄 AI Document Extractor</a>
+  <span class="model">local model · runs fully offline</span>
+</header>
+<main>
+{% block content %}{% endblock %}
+</main>
+</body>
+</html>

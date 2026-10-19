@@ -1,0 +1,206 @@
+{
+  "01_sinar_kopi.pdf": {
+    "vendor_name": "CV Sinar Kopi Nusantara",
+    "vendor_tax_id": "01.234.567.8-901.000",
+    "invoice_number": "INV/2026/09/0147",
+    "invoice_date": "2026-09-03",
+    "due_date": "2026-10-03",
+    "currency": "IDR",
+    "bill_to": "PT Contoh Logistik Abadi",
+    "line_items": [
+      {
+        "description": "Biji kopi arabika Gayo 1 kg",
+        "quantity": 12,
+        "unit_price": 185000,
+        "amount": 2220000
+      },
+      {
+        "description": "Biji kopi robusta Lampung 1 kg",
+        "quantity": 8,
+        "unit_price": 120000,
+        "amount": 960000
+      },
+      {
+        "description": "Gula aren cair 1 L",
+        "quantity": 5,
+        "unit_price": 45000,
+        "amount": 225000
+      }
+    ],
+    "subtotal": 3405000,
+    "tax": 374550.0,
+    "total": 3779550.0
+  },
+  "02_bright_cloud.pdf": {
+    "vendor_name": "Bright Cloud Hosting LLC",
+    "vendor_tax_id": null,
+    "invoice_number": "BCH-88213",
+    "invoice_date": "2026-08-31",
+    "due_date": "2026-09-15",
+    "currency": "USD",
+    "bill_to": "Example Studio Ltd",
+    "line_items": [
+      {
+        "description": "VPS 4 vCPU / 8 GB (monthly)",
+        "quantity": 3,
+        "unit_price": 48.0,
+        "amount": 144.0
+      },
+      {
+        "description": "Managed PostgreSQL 50 GB",
+        "quantity": 1,
+        "unit_price": 65.0,
+        "amount": 65.0
+      },
+      {
+        "description": "Object storage 500 GB",
+        "quantity": 1,
+        "unit_price": 11.5,
+        "amount": 11.5
+      },
+      {
+        "description": "Support plan - Business",
+        "quantity": 1,
+        "unit_price": 99.0,
+        "amount": 99.0
+      }
+    ],
+    "subtotal": 319.5,
+    "tax": 0.0,
+    "total": 319.5
+  },
+  "03_mitra_atk.pdf": {
+    "vendor_name": "Toko Mitra ATK",
+    "vendor_tax_id": null,
+    "invoice_number": "MTK-0921",
+    "invoice_date": "2026-09-21",
+    "due_date": null,
+    "currency": "IDR",
+    "bill_to": "Kantor Cabang Medan",
+    "line_items": [
+      {
+        "description": "Kertas A4 80gsm (rim)",
+        "quantity": 20,
+        "unit_price": 52000,
+        "amount": 1040000
+      },
+      {
+        "description": "Tinta printer hitam",
+        "quantity": 6,
+        "unit_price": 95000,
+        "amount": 570000
+      },
+      {
+        "description": "Map plastik",
+        "quantity": 50,
+        "unit_price": 3500,
+        "amount": 175000
+      },
+      {
+        "description": "Pulpen gel 0.5",
+        "quantity": 24,
+        "unit_price": 4500,
+        "amount": 108000
+      },
+      {
+        "description": "Stapler besar",
+        "quantity": 2,
+        "unit_price": 78000,
+        "amount": 156000
+      }
+    ],
+    "subtotal": 2049000,
+    "tax": 225390.0,
+    "total": 2274390.0
+  },
+  "04_pixel_forge.pdf": {
+    "vendor_name": "Pixel Forge Design Co.",
+    "vendor_tax_id": "EIN 12-3456789",
+    "invoice_number": "PF-2026-031",
+    "invoice_date": "2026-09-10",
+    "due_date": "2026-10-10",
+    "currency": "USD",
+    "bill_to": "Sample Retail Inc.",
+    "line_items": [
+      {
+        "description": "Logo redesign",
+        "quantity": 1,
+        "unit_price": 1200.0,
+        "amount": 1200.0
+      },
+      {
+        "description": "Brand guideline document",
+        "quantity": 1,
+        "unit_price": 800.0,
+        "amount": 800.0
+      },
+      {
+        "description": "Social media templates (set of 10)",
+        "quantity": 2,
+        "unit_price": 150.0,
+        "amount": 300.0
+      }
+    ],
+    "subtotal": 2300.0,
+    "tax": 184.0,
+    "total": 2484.0
+  },
+  "05_jaya_teknik.pdf": {
+    "vendor_name": "PT Jaya Teknik Mandiri",
+    "vendor_tax_id": "02.987.654.3-210.000",
+    "invoice_number": "JTM/INV/IX/2026/055",
+    "invoice_date": "2026-09-15",
+    "due_date": "2026-09-30",
+    "currency": "IDR",
+    "bill_to": "PT Contoh Logistik Abadi",
+    "line_items": [
+      {
+        "description": "Servis AC split 2 PK",
+        "quantity": 4,
+        "unit_price": 175000,
+        "amount": 700000
+      },
+      {
+        "description": "Freon R32 (per kg)",
+        "quantity": 3,
+        "unit_price": 250000,
+        "amount": 750000
+      },
+      {
+        "description": "Pipa tembaga 1/4 + 3/8 (per m)",
+        "quantity": 10,
+        "unit_price": 85000,
+        "amount": 850000
+      }
+    ],
+    "subtotal": 2300000,
+    "tax": 253000.0,
+    "total": 2553000.0
+  },
+  "06_wrong_total.pdf": {
+    "vendor_name": "Northwind Office Supply",
+    "vendor_tax_id": null,
+    "invoice_number": "NW-77120",
+    "invoice_date": "2026-09-02",
+    "due_date": "2026-10-02",
+    "currency": "USD",
+    "bill_to": "Example Studio Ltd",
+    "line_items": [
+      {
+        "description": "Ergonomic chair",
+        "quantity": 2,
+        "unit_price": 219.0,
+        "amount": 438.0
+      },
+      {
+        "description": "Standing desk frame",
+        "quantity": 1,
+        "unit_price": 340.0,
+        "amount": 340.0
+      }
+    ],
+    "subtotal": 778.0,
+    "tax": 0.0,
+    "total": 878.0
+  }
+}

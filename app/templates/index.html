@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block head %}{% if processing %}<meta http-equiv="refresh" content="4">{% endif %}{% endblock %}
+{% block content %}
+<div class="stats" style="margin-bottom:18px">
+  <div class="stat"><span class="muted">Documents</span><b>{{ stats.total }}</b></div>
+  <div class="stat"><span class="muted">Approved</span><b>{{ stats.approved }}</b></div>
+  <div class="stat"><span class="muted">Ready to approve</span><b>{{ stats.extracted }}</b></div>
+  <div class="stat"><span class="muted">Needs review</span><b>{{ stats.needs_review }}</b></div>
+  <div class="stat"><span class="muted">Avg. time / doc</span><b>{{ stats.avg_seconds or "–" }} s</b></div>
+</div>
+
+<div class="card">
+  <h2>Upload invoices (PDF)</h2>
+  <form action="/upload" method="post" enctype="multipart/form-data" class="row">
+    <input type="file" name="files" accept="application/pdf" multiple required>
+    <button type="submit">Extract</button>
+    <span class="muted">Each file is read by the local model, then checked (line totals, subtotal, tax, dates).</span>
+  </form>
+</div>
+
+<div class="card">
+  <div class="row" style="justify-content:space-between; margin-bottom:8px">
+    <h2 style="margin:0">Documents</h2>
+    <a class="btn secondary" href="/export.csv">Export CSV</a>
+  </div>
+  {% if docs %}
+  <table>
+    <thead><tr>
+      <th>#</th><th>File</th><th>Vendor</th><th class="hide-sm">Invoice no.</th><th class="hide-sm">Date</th>
+      <th class="num">Total</th><th>Status</th><th class="num hide-sm">Time</th>
+    </tr></thead>
+    <tbody>
+    {% for d in docs %}
+      <tr>
+        <td>{{ d.id }}</td>
+        <td><a href="/documents/{{ d.id }}">{{ d.filename }}</a></td>
+        <td>{{ d.vendor_name or "" }}</td>
+        <td class="hide-sm">{{ d.invoice_number or "" }}</td>
+        <td class="hide-sm">{{ d.invoice_date or "" }}</td>
+        <td class="num">{% if d.total is not none %}{{ d.currency }} {{ "{:,.2f}".format(d.total) }}{% endif %}</td>
+        <td><span class="badge s-{{ d.status }}">{{ d.status.replace("_", " ") }}</span>
+            {% if d.issue_count %}<span class="muted">· {{ d.issue_count }} issue{{ "s" if d.issue_count > 1 }}</span>{% endif %}</td>
+        <td class="num hide-sm">{% if d.seconds %}{{ d.seconds }} s{% endif %}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="muted">No documents yet. Try the files in <code>samples/</code>.</p>
+  {% endif %}
+</div>
+{% endblock %}

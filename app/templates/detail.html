@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block title %}{{ doc.filename }} · AI Document Extractor{% endblock %}
+{% block head %}{% if doc.status == "processing" %}<meta http-equiv="refresh" content="3">{% endif %}{% endblock %}
+{% block content %}
+{% set d = doc.data or {} %}
+<div class="row" style="justify-content:space-between; margin-bottom:14px">
+  <div>
+    <h1>{{ doc.filename }}</h1>
+    <span class="badge s-{{ doc.status }}">{{ doc.status.replace("_", " ") }}</span>
+    {% if doc.seconds %}<span class="muted">· {{ doc.model }} · {{ doc.seconds }} s</span>{% endif %}
+  </div>
+  <a class="btn secondary" href="/">← All documents</a>
+</div>
+
+{% if doc.error %}<div class="issue" style="background:var(--bad-bg);color:var(--bad)">{{ doc.error }}</div>{% endif %}
+
+<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(420px, 1fr)); gap:18px">
+  <div class="card" style="padding:0; overflow:hidden; align-self:start">
+    <a href="/documents/{{ doc.id }}/file" target="_blank" title="Open PDF">
+      <img src="/documents/{{ doc.id }}/page/1.png" alt="Page 1 of {{ doc.filename }}" style="width:100%; display:block">
+    </a>
+  </div>
+
+  <div>
+    {% if doc.issues %}
+    <div class="card">
+      <h2>Check these before approving</h2>
+      {% for i in doc.issues %}<div class="issue"><b>{{ i.field }}</b>: {{ i.message }}</div>{% endfor %}
+    </div>
+    {% endif %}
+
+    {% if doc.data %}
+    <form method="post" class="card">
+      <h2>Extracted data</h2>
+      <table>
+        {% for key, label in [("vendor_name","Vendor"),("vendor_tax_id","Tax ID"),("invoice_number","Invoice no."),
+                              ("invoice_date","Invoice date"),("due_date","Due date"),("currency","Currency"),("bill_to","Bill to")] %}
+        <tr><th style="width:130px">{{ label }}</th>
+            <td><input type="text" name="{{ key }}" value="{{ d[key] if d[key] is not none else '' }}"></td></tr>
+        {% endfor %}
+      </table>
+
+      <h2 style="margin-top:18px">Line items</h2>
+      <table id="items">
+        <thead><tr><th>Description</th><th class="num" style="width:12%">Qty</th><th class="num" style="width:22%">Unit price</th><th class="num" style="width:22%">Amount</th></tr></thead>
+        <tbody>
+        {% for it in d.line_items %}
+          <tr>
+            <td><input type="text" name="item_description" value="{{ it.description }}"></td>
+            <td><input type="text" name="item_quantity" value="{{ '%g' % it.quantity }}" style="text-align:right"></td>
+            <td><input type="text" name="item_unit_price" value="{{ '%.2f' % it.unit_price }}" style="text-align:right"></td>
+            <td><input type="text" name="item_amount" value="{{ '%.2f' % it.amount }}" style="text-align:right"></td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      <p><button type="button" class="secondary" onclick="addRow()">+ Add line</button></p>
+
+      <table style="max-width:320px; margin-left:auto">
+        {% for key, label in [("subtotal","Subtotal"),("tax","Tax"),("total","Total")] %}
+        <tr><th>{{ label }}</th><td><input type="text" name="{{ key }}" value="{{ '%.2f' % d[key] }}" style="text-align:right"></td></tr>
+        {% endfor %}
+      </table>
+
+      <div class="row" style="justify-content:flex-end; margin-top:14px">
+        <button type="submit" name="action" value="save" class="secondary">Save &amp; re-check</button>
+        <button type="submit" name="action" value="approve">Approve</button>
+      </div>
+    </form>
+
+    <details class="card"><summary>Raw text sent to the model</summary><pre style="white-space:pre-wrap">{{ doc.raw_text }}</pre></details>
+    {% endif %}
+  </div>
+</div>
+
+<script>
+function addRow() {
+  const tr = document.createElement("tr");
+  tr.innerHTML = ["item_description","item_quantity","item_unit_price","item_amount"]
+    .map((n, i) => `<td><input type="text" name="${n}" ${i ? 'style="text-align:right"' : ''}></td>`).join("");
+  document.querySelector("#items tbody").appendChild(tr);
+}
+</script>
+{% endblock %}
